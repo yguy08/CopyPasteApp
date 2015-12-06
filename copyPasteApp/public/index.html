@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="copyPasteApp">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="img/favicon.ico">
+
+    <title>Copy & Paste Archive</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/navbar.css" rel="stylesheet">
+    <link href="css/theme.css" rel="stylesheet">
+    <link href="css/sticky-footer-navbar.css" rel="stylesheet">
+
+
+</head>
+
+<body  ng-controller="copyPasteCtrl">
+
+<div class="container"> <!-- Static navbar container -->
+
+    <!-- Static navbar -->
+      <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand"><img id="wyatt" alt="brand" width="20" height="20" src="img/cometmoney_logo336x336.jpg"></a>
+          </div>
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li><a>&#128176;</a></li>
+            </ul>
+            <form class="navbar-form navbar-right" role="search">
+            </form>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      </nav>
+
+      <!-- Main component for a primary marketing message or call to action -->
+    <div class="page-header" style="padding-top:3px;">
+        <h1>Copy & Paste Archive</h1>
+    </div>
+        <p>Find commonly used text snippets to copy and paste</p>
+
+
+</div> <!-- /Nav and page header container -->
+
+<!-- Main Content Container -->
+<div class="container theme-showcase" role="main">
+
+  <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+          <h4 class="modal-title" id="myLargeModalLabel">{{copyName}}</h4>
+        </div>
+        <div class="modal-body">
+          <p>{{copyText}}</p>
+        </div>
+
+        </div>
+      </div>
+</div>
+
+<div class="page-header">
+        <h1>Properties  <button class="btn btn-default btn-xs" type="submit" data-toggle="modal" data-target="#addModal">
+            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true">
+          </span> Add New</button>
+          </h1>
+
+          <!-- Modal -->
+          <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel">
+            <div class="modal-dialog" role="document">
+
+
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="addModalLabel">Add New</h4>
+                </div>
+
+                <!--Modal Body -->
+                <div class="modal-body">
+
+                <form role="form">
+                  <div class="form-group">
+                <strong>Name:</strong>
+                <input style="margin:10px;" class="form-control" ng-model="copy.name" placeholder="Enter name">
+              </div>
+              <div class="form-group">
+                <strong>Description:</strong>
+                <input style="margin:10px;" class="form-control" ng-model="copy.description" placeholder="Enter description">
+              </div>
+              <div class="form-group">
+                <strong>Copy Value:</strong>
+                <textarea style="margin:10px;" class="form-control" rows="2" ng-model="copy.value"
+                placeholder="Enter text to copy (to protect your privacy, this is not shown in the table)..."></textarea>
+              </div>
+                </div>
+
+                <!--Modal Footer -->
+                <div class="modal-footer">
+                  <div class="form-group">
+                  <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="refresh()">Close</button>
+                  <button type="Submit" class="btn btn-primary" ng-click="addCopyPaste()" data-dismiss="modal">Add</button>
+                </div>
+                </div>
+                </form>
+              </div>
+            </div>
+          </div>
+</div>
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="editModalLabel">Add New</h4>
+      </div>
+      <div class="modal-body">
+      <strong>Name:</strong>
+      <input style="margin:10px;" class="form-control" ng-model="copy.name" placeholder="Enter name">
+      <strong>Description:</strong>
+      <input style="margin:10px;" class="form-control" ng-model="copy.description" placeholder="Enter description">
+      <strong>Copy Value:</strong>
+      <textarea style="margin:10px;" class="form-control" rows="2" ng-model="copy.value" placeholder="Enter text to copy (to protect your privacy, this is not shown in the table)..."></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="refresh()">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="deselect()">Clear</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addCopyPaste()">Add</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="update()">Update</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="table">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="copy in copypaste">
+                <td>{{copy.name}}</td>
+                <td>{{copy.description}}</td>
+                <td class="active"><button class="btn btn-default btn-xs" type="submit" data-clipboard-demo="" data-clipboard-action="copy"
+                  data-clipboard-text="{{copy.value}}">
+                  <span class="glyphicon glyphicon-copy" aria-hidden="true">
+                </span> Copy</button>&nbsp;&nbsp;<button class="btn btn-default btn-xs" type="submit" data-toggle="modal" data-target=".bs-example-modal-lg"
+                ng-click="showDetails(copy.name, copy.value)">
+                  <span class="glyphicon glyphicon-info-sign">
+                </span></button></td>
+                <td><button class="btn btn-default btn-xs" type="submit"
+                ng-click="edit(copy._id)" data-toggle="modal" data-target="#editModal">
+                  <span class="glyphicon glyphicon-pencil">
+                </span> Edit</button></td>
+                <td><button class="btn btn-default btn-xs" type="submit"
+                ng-click="remove(copy._id)">
+                  <span class="glyphicon glyphicon-remove-circle">
+                </span> Remove</button></td>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+      </div>
+
+</div><!--/Main Content Container-->
+
+<footer class="footer">
+  <div class="container">
+    <p class="text-muted" style="padding:20px 5px 5px 5px;">Copyright &copy; 2015 Comet Money</p>
+  </div>
+</footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/jquery-1.11.3.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/angular.js"></script>
+
+    <!--clipboardCtrl-->
+    <script src="js/controllers/controller.js"></script>
+    <!-- 2. Include library -->
+    <script src="js/clipboard.js"></script>
+    <script src="js/demos.js"></script>
+
+
+
+</body>
+</html>
