@@ -12,12 +12,10 @@ clipboardDemos.on('success', function(e) {
     console.info('Trigger:', e.trigger);
 
 
-$( "#wyatt" ).attr( "src","./img/cometSuccess.ico" );
-
+    $( "#wyatt" ).attr( "src","./img/cometSuccess.ico" );
     $("#wyatt").hide("fast", function() {
-
-        $( "#wyatt" ).attr( "src","./img/favicon.ico" );
-        $("#wyatt").show("fast");
+    $( "#wyatt" ).attr( "src","./img/favicon.ico" );
+    $("#wyatt").show("fast");
 
 });
 
@@ -28,11 +26,9 @@ clipboardDemos.on('error', function(e) {
     console.error('Trigger:', e.trigger);
 
     $( "#wyatt" ).attr( "src","./img/cometFail.ico" );
-
     $("#wyatt").hide("slow", function() {
-
-        $( "#wyatt" ).attr( "src","./img/favicon.ico" );
-        $("#wyatt").show("fast");
+    $( "#wyatt" ).attr( "src","./img/favicon.ico" );
+    $("#wyatt").show("fast");
 
       });
 

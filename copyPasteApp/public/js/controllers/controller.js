@@ -16,13 +16,30 @@ copyPasteApp.controller('copyPasteCtrl', function ($scope, $http) {
         refresh();
 
         $scope.addCopyPaste = function(){
-            console.log($scope.copy);
-            $http.post('/copypaste', $scope.copy).success(function(response){
-            console.log(response);
-            //number list
-            refresh();
-});
+            if ($scope.copy !== ""){
+              console.log($scope.copy);
+              $http.post('/copypaste', $scope.copy).success(function(response){
+              console.log(response);
+              //number list
+              $("#wyatt").attr( "src","./img/cometSuccess.ico" );
+              $("#wyatt").hide("fast", function()
+              {
+                  $("#wyatt").attr( "src","./img/favicon.ico" );
+                  $("#wyatt").show("fast");
+              });
+              refresh();
+              });
+            } else {
+              $("#wyatt").attr( "src","./img/cometFail.ico" );
+              $("#wyatt").hide("fast", function()
+              {
+                $("#wyatt").attr( "src","./img/favicon.ico" );
+                $("#wyatt").show("fast");
+              });
+              refresh();
+            }
         };
+
 
         $scope.remove = function(id){
             console.log(id);
