@@ -38,7 +38,6 @@
             </button>
             <a class="navbar-brand"><img id="wyatt" alt="brand" width="20" height="20" src="img/cometmoney_logo336x336.jpg"></a>
           </div>
-
         </div><!--/.container-fluid -->
       </nav>
 
@@ -62,8 +61,7 @@
         <div class="modal-body">
           <p>{{copyText}}</p>
         </div>
-
-        </div>
+      </div>
       </div>
 </div>
 
@@ -80,9 +78,11 @@
     <label class="sr-only" for="value">Value</label>
     <input type="text" class="form-control" id="value" placeholder="Value" ng-model="copy.value">
   </div>
+  <div class="btn-group" role="group" aria-label="...">
   <button type="submit" class="btn btn-default" ng-click="addCopyPaste()">Add</button>
   <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="update()">Update</button>
   <button type="button" class="btn btn-default" ng-click="deselect()">Clear</button>
+  </div>
 </form>
 <br />
 
@@ -92,28 +92,27 @@
               <tr>
                 <th>Name</th>
                 <th>Description</th>
-                <th>Value</th>
+                <th>Action</th>
                 </tr>
             </thead>
             <tbody>
               <tr ng-repeat="copy in copypaste | filter:query">
                 <td>{{copy.name}}</td>
                 <td>{{copy.description}}</td>
-                <td class="active"><button class="btn btn-default btn-xs" type="submit" data-clipboard-demo="" data-clipboard-action="copy"
-                  data-clipboard-text="{{copy.value}}">
-                  <span class="glyphicon glyphicon-copy" aria-hidden="true">
-                </span></button>&nbsp;&nbsp;<button class="btn btn-default btn-xs" type="submit" data-toggle="modal" data-target=".bs-example-modal-lg"
-                ng-click="showDetails(copy.name, copy.value)">
-                  <span class="glyphicon glyphicon-info-sign">
-                </span></button></td>
-                <td><button class="btn btn-default btn-xs" type="submit"
-                ng-click="edit(copy._id)" data-toggle="modal" data-target="#editModal">
+                <td><div class="btn-group" role="group">
+                  <button class="btn btn-default btn-sm" type="submit" data-clipboard-demo="" data-clipboard-action="copy"
+                  data-clipboard-text="{{copy.value}}"><span class="glyphicon glyphicon-copy">
+                </span></button>
+                  <button class="btn btn-default btn-sm" type="submit" data-toggle="modal" data-target=".bs-example-modal-lg"
+                ng-click="showDetails(copy.name, copy.value)"><span class="glyphicon glyphicon-info-sign">
+                </span></button>
+                <button class="btn btn-default btn-sm" type="submit" ng-click="edit(copy._id)">
                   <span class="glyphicon glyphicon-pencil">
-                </span></button></td>
-                <td><button class="btn btn-default btn-xs" type="submit"
-                ng-click="remove(copy._id)">
-                  <span class="glyphicon glyphicon-remove-circle">
-                </span></button></td>
+                  </span></button>
+                <button class="btn btn-default btn-sm" type="submit"
+                ng-click="remove(copy._id)"><span class="glyphicon glyphicon-remove-circle">
+                </span></button>
+                </div></td>
               </tr>
             </tbody>
           </table>
@@ -133,9 +132,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="js/jquery-1.11.3.js"></script>
     <script src="js/bootstrap.js"></script>
-
     <script src="js/angular.js"></script>
-
     <!--clipboardCtrl-->
     <script src="js/controllers/controller.js"></script>
     <!-- 2. Include library -->
