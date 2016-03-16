@@ -1,2 +1,3 @@
 # CopyPasteApp
-copyPasteApp v1.0 - add, delete, edit, save to db
+
+Copy and Paste - fast and in one place
