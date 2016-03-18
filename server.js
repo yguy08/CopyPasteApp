@@ -1,6 +1,7 @@
 var express = require('express');
 var app     = express();
 var mongojs = require('mongojs');
+//local and for heroku dbs. Comment out depending on which one
 var db = mongojs('copypaste', ['copypaste']);
 var bodyParser = require('body-parser');
 
@@ -15,14 +16,6 @@ app.get('/copypaste', function(req,res){
       res.json(docs);
     });
   });
-
-//old create contact
-//app.post('/copypaste', function (req, res) {
-  //console.log(req.body);
-  //db.copypaste.insert(req.body, function(err,doc){
-      //res.json(doc);
-  //});
-//});
 
 app.post('/copypaste', function (req, res) {
   console.log(req.body);

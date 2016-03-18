@@ -40,7 +40,6 @@ copyPasteApp.controller('copyPasteCtrl', function ($scope, $http) {
             }
         };
 
-
         $scope.remove = function(id){
             console.log(id);
             $http.delete('/copypaste/' + id).success(function(response){
